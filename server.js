@@ -6,8 +6,6 @@ var port = process.env.PORT || 3000;
 
 const app = express();
 
-var orm = require("./config/orm.js");
-
 app.use(express.static("public"));
 
 app.get('/', function (req, res){

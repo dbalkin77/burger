@@ -5,7 +5,7 @@ var orm = {
     selectAll: function(tableInput) {
             var queryString = 'SELECT * FROM ??';
             connection.query(queryString, [tableInput], function (err, result) {
-                conosle.log(result);
+                console.log(result);
             });
         },
         insertOne: function (table, burger_name, burger) {
@@ -17,7 +17,7 @@ var orm = {
         updateOne: function (table_name, burger_type, new_burger, colToSearch, id) {
             var queryString = "UPDATE ?? SET ?? = '?' WHERE ?? = '?'";
             connection.query(queryString, [table_name, burger_type, new_burger, colToSearch, id], function (err, result){
-                conosle.log (result);
+                console.log (result);
             });
     }
 };
