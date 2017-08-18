@@ -2,11 +2,17 @@ const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 
+var port = process.env.PORT || 3000;
 
 const app = express();
 
-app.listen(8000);
+var orm = require("./config/orm.js");
+
+app.use(express.static("public"));
 
 app.get('/', function (req, res){
-    res.send('hello world');
+    res.send('Hey, you, world');
 });
+
+app.listen(port);
+
