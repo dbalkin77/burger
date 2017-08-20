@@ -12,5 +12,11 @@ app.get('/', function (req, res){
     res.send('Hey, you, world');
 });
 
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 app.listen(port);
 

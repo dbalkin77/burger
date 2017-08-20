@@ -26,8 +26,11 @@ function objToSql(ob) {
 
 // Object to select all burgers from db.
 var orm = {
-  all: function(tableInput, cb) {
+  selectAll: function(tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
+
+    console.log(queryString);
+
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -37,7 +40,7 @@ var orm = {
   },
         
 // Insert One Burger into DB method
-  create: function(table, cols, vals, cb) {
+  insertOne: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
     queryString += " (";
@@ -57,7 +60,7 @@ var orm = {
     });
   },
 // An example of objColVals would be {name: panther, sleepy: true}
-  update: function(table, objColVals, condition, cb) {
+  updateOne: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 
     queryString += " SET ";
