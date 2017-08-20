@@ -1,24 +1,78 @@
 // Import MySQL connection.
 var connection = require("../config/connection.js");
 
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
+// Helper function for SQL syntax.
+function objToSql(ob) {
+  var arr = [];
+
+  for (var key in ob) {
+    if (Object.hasOwnProperty.call(ob, key)) {
+      arr.push(key + "=" + ob[key]);
+    }
+  }
+
+  return arr.toString();
+}
+
+// Object to select all burgers from db.
 var orm = {
-    selectAll: function(tableInput) {
-            var queryString = 'SELECT * FROM ??';
-            connection.query(queryString, [tableInput], function (err, result) {
-                console.log(result);
-            });
-        },
-        insertOne: function (table, burger_name, burger) {
-            var queryString = 'INSERT INTO ?? (??) VALUES (?)';
-            connection.query(queryString, [table, burger_name, burger], function (err, result){
-                console.log(result);
-            });
-    },
-        updateOne: function (table_name, burger_type, new_burger, colToSearch, id) {
-            var queryString = "UPDATE ?? SET ?? = '?' WHERE ?? = '?'";
-            connection.query(queryString, [table_name, burger_type, new_burger, colToSearch, id], function (err, result){
-                console.log (result);
-            });
+  all: function(tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+        
+// Insert One Burger into DB method
+  create: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table;
+
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
+
+    console.log(queryString);
+
+    connection.query(queryString, vals, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+// An example of objColVals would be {name: panther, sleepy: true}
+  update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
+
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      cb(result);
+    });
     }
 };
 
