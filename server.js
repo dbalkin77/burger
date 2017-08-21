@@ -9,7 +9,7 @@ const app = express();
 app.use(express.static("public"));
 
 app.get('/', function (req, res){
-    res.send('Hey, you, world');
+    res.send('Something NEW');
 });
 
 // Set Handlebars.
