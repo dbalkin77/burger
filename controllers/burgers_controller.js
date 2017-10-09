@@ -12,12 +12,12 @@ router.get('/burger', function(req,res) {
 		var hbsObject = {
             burgers : data
         };
-		console.log(hbsObject)
+		// console.log(hbsObject)
 		res.render('index', hbsObject);
 	});
 });
 
-router.post('/burger/create', function(req,res) {
+router.post('/burger/update/:id', function(req,res) {
 	burger.insertOne(['name', 'devoured'], [req.body.name, req.body.devoured], function(data){
 		res.redirect('/burger')
 	});
@@ -25,11 +25,12 @@ router.post('/burger/create', function(req,res) {
 
 router.put('/burger/update/:id', function(req,res) {
 	var condition = 'id = ' + req.params.id;
-
+	console.log(res);
 	console.log(`condition is ${condition}`);
 
 	burger.update({'devoured' : req.body.devoured}, condition, function(data){
 		res.redirect('/burger');
+		console.log(res);
 	});
 });
 

@@ -1,9 +1,9 @@
         <!-- Dynamically Insert Ready Burgers Here -->
         {{#each burgers}}
           {{#unless devoured}}
-          <form action="burger/eat/{{id}}" method="POST">
+          <form action="burger/update/{{id}}" method="POST">
             <div class="input-group">
-              <li class="form-control">{{id}}. {{burger_name}}</li>
+              <li class="form-control">{{id}}.{{burger_name}}</li>
                 <span class="input-group-btn">
                   <button class="btn btn-success devour-button" type="submit">Devour It!</button>
                 </span>
@@ -17,16 +17,9 @@
 <ul>
   {{#each burger}}
     {{#if this.devoured}}
-      <li>
-        {{this.name}}
-
-        <form action="burger/update/{{this.id}}?_method=PUT" method="POST">
-          <input type="hidden" name="devoured" value="false">
-          <button type="submit">EAT DA BURGER!</button>
-        </form>
-
-        {{> burger/delete-burger}}
-      </li>
+      <div class="input-group">
+          <li class="form-control">{{id}}.{{burger_name}}</li>
+      </div>
     {{/if}}
   {{/each}}
 </ul>
