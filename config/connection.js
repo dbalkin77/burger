@@ -1,5 +1,6 @@
 // Set up MySQL connection.
 const mysql = require('mysql');
+var connection;
 
 if(process.env.JAWSDB_URL) {
   //Heroku deployment
@@ -10,8 +11,8 @@ if(process.env.JAWSDB_URL) {
         root: 3000,
         host: "localhost",
         user: "root",
-        password: "",
-        database: "db_name",
+        password: "root",
+        database: "burgers_db",
     });
 };
 // Make connection.
