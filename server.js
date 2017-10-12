@@ -10,9 +10,9 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.get('/', function (req, res){
-//     res.send('Something NEW');
-// });
+app.get('/', function (req, res){
+    res.send('Something NEW');
+});
 
 // Handlebars
 var exphbs = require('express-handlebars');
