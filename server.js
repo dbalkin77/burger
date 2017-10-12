@@ -1,6 +1,7 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000;
 
 
 const app = express();
@@ -22,7 +23,7 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
 
-app.set('port', (process.env.PORT || 3000));
+// app.set('port', (process.env.PORT || 3000));
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
